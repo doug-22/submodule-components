@@ -1,0 +1,11 @@
+.menu {
+  display: flex;
+  gap: 20px;
+
+  list-style: none;
+}
+
+.item {
+  border: 1px solid black;
+  padding: 1rem;
+}
