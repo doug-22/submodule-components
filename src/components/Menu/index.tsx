@@ -1,16 +1,29 @@
+import { useCallback } from 'react'
 import './styles.css'
 import { useNavigate } from 'react-router-dom'
 
-export const Menu = () => {
+interface IMenu {
+  module: "dash" | "config"
+}
+
+export const Menu: React.FC<IMenu> = ({ module }) => {
   const navigate = useNavigate()
 
-  const redirectDashboard = () => {
+  const redirectDashboard = useCallback(() => {
+    if(module === "dash") {
+      navigate("/dash-home")
+      return
+    }
     window.location.href = `http://localhost:4001/dash-home`;
-  }
+  },[module])
 
-  const redirectConfig = () => {
+  const redirectConfig = useCallback(() => {
+    if(module === "config") {
+      navigate("/config-home")
+      return
+    }
     window.location.href = `http://localhost:4002/config-home`;
-  }
+  },[module])
 
   return (
     <div>
