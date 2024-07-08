@@ -9,20 +9,20 @@ interface IMenu {
 export const Menu: React.FC<IMenu> = ({ module }) => {
   const navigate = useNavigate()
 
-  const redirectDashboard = useCallback(() => {
+  const redirectDashboard = useCallback((url: string) => {
     if(module === "dash") {
-      navigate("/dash-home")
+      navigate(url)
       return
     }
-    window.location.href = `http://localhost:4001/dash-home`;
+    window.location.href = `http://localhost:4001${url}`;
   },[module])
 
-  const redirectConfig = useCallback(() => {
+  const redirectConfig = useCallback((url: string) => {
     if(module === "config") {
-      navigate("/config-home")
+      navigate(url)
       return
     }
-    window.location.href = `http://localhost:4002/config-home`;
+    window.location.href = `http://localhost:4002${url}`;
   },[module])
 
   return (
@@ -30,16 +30,16 @@ export const Menu: React.FC<IMenu> = ({ module }) => {
       <h2>Menu</h2>
 
       <ul className="menu">
-        <li className="item" onClick={redirectDashboard}>
+        <li className="item" onClick={() => redirectDashboard("/dash-home")}>
           Dashboard
         </li>
-        <li className="item" onClick={() => navigate('/dash-page')}>
+        <li className="item" onClick={() => redirectDashboard("/dash-page")}>
           Dashboard: page
         </li>
-        <li className="item" onClick={redirectConfig}>
+        <li className="item" onClick={() => redirectConfig("/config-home")}>
           Configurações
         </li>
-        <li className="item" onClick={() => navigate('/config-page')}>
+        <li className="item" onClick={() => redirectConfig("/config-page")}>
           Configurações: page
         </li>
       </ul>
